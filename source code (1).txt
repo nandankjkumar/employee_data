@@ -1,0 +1,19 @@
+1. Mongo import command:
+
+mongoimport C:\Users\jnandan\Downloads\employee_data -d employee -c details --drop --jsonArray
+
+2.Count of employee less than 37
+
+ db.details.find({"term1":{$lt:37}}).count()
+
+3.Find the average score of employees for term 1
+
+db.details.aggregate([{$group:{_id:"term1",avg:{$avg:"$term1"}}}])
+
+4.Find employees who passed in all three terms
+
+db.details.find({"term1":{$gt:37},"term2":{$gt:37},"term3":{$gt:37}}).count()
+
+5.Find the average score of employees
+
+db.details.aggregate({$project:{avg_emp:{$avg:["$term1","$term2","$term3"]}}})
